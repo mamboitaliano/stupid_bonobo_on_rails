@@ -1,20 +1,17 @@
 <div class="container">
-  <h3><%=@survey.title%></h3>
+  <h3><%= @survey.title %></h3>
   <div class="question-container">
-    <%@survey.questions.each do |question|%>
+    <% @survey.questions.each do |question| %>
     <div class="panel panel-default">
       <div class="question-wrapper">
         <p class="question"><%=question.text%></p>
         <div class="space"></div>
-        <form id="delete_button" action="/surveys/<%= @survey.id %>/questions/<%= question.id %>" class="question" method="POST">
-          <input type="hidden" name="_method" value="DELETE">
-          <input type="hidden" name="id" value=<%=question.id%>>
-          <input type="hidden" name="survey_id" value=<%=@survey.id%>>
-          <input type="submit" value="Delete">
-        </form>
+        <%= form_tag delete_question_path(@survey, question), method:'DELETE', class: "delete-question-form", remote: true do %>
+          <%= submit_tag "Delete" %>
+        <% end %>
       </div>
     </div>
-  <%end%>
+  <% end %>
   </div>
   <form id="add_question" action="/surveys/<%= @survey.id %>" method="POST">
     <input type="hidden" name="_method" value="PUT" >

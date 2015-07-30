@@ -6,7 +6,6 @@ gem 'pg'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sass-rails', '>= 3.2'
 gem 'uglifier', '>= 1.3.0'
-# gem 'turbolinks'
 
 gem 'jquery-rails'
 gem 'bcrypt'

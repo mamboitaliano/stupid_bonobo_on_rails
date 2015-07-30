@@ -20,6 +20,27 @@ class SurveysController < ApplicationController
     redirect_to "/surveys/#{@survey.id}/edit"
   end
 
+  def remit
+    @current_survey = Survey.find(params[:id])
+
+    # very clever, thanks harvey!
+    params.each do |k, v|
+      unless k.to_i == 0
+        question = Question.find_by(id: k)
+        question.responses << Response.create!(text: v)
+      else
+        "You're a butterface!"
+        # erb :'surveys/survey_show'
+      end
+    end
+    redirect_to "/surveys/#{@current_survey.id}/results"
+  end
+
+  def results
+    @current_survey = Survey.find(params[:id])
+    render 'results'
+  end
+
   def editform
     @survey = Survey.find(params[:id])
     render 'edit_survey'
@@ -45,7 +66,7 @@ class SurveysController < ApplicationController
     Question.destroy(question.id)
     survey.save
     if request.xhr?
-      "YOU DA MAN"
+      render nothing: true, status: :ok
     else
       redirect_to "/surveys/#{survey.id}/edit"
     end

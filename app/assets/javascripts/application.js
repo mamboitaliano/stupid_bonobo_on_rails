@@ -1,15 +1,3 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file.
-//
-// Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
-// about supported directives.
-//
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
@@ -18,6 +6,11 @@
 
 
 $(document).ready(function() {
+
+  $(document).on('ajax:success', '.delete-question-form', function(){
+    var panel = $(this).closest('.panel');
+    panel.fadeOut(function(){ panel.remove(); });
+  });
 
   // $('.question-container').on('submit', "#delete_button", function(e){
   //   e.preventDefault();
@@ -73,10 +66,10 @@ $(document).ready(function() {
   $('body').pan({fps: 30, speed: 2, dir: 'left'});
   $('#monkey').sprite({fps: 6, no_of_frames: 5})
     .spRandom({
-              top: 260,
+              top: 0,
               left: 1200,
               right: 100,
-              bottom: 260,
+              bottom: 0,
               speed: 4000,
               pause: 3000
           })

@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  # resources :surveys do
+  #   resources :questions
+  # end
+
+  get '/SPACER_HERE', to: 'dont#care'
+
   get 'index/index'
 
   get 'surveys/index' => 'surveys#index'
@@ -9,13 +16,18 @@ Rails.application.routes.draw do
 
   post 'surveys/create' => 'surveys#create'
 
+  post 'surveys/:id' => 'surveys#remit'
+
+  get 'surveys/:id/results' => 'surveys#results'
+
   get 'surveys/:id/edit' => 'surveys#editform' # just the form to edit a survey
 
   put 'surveys/:id' => 'surveys#edit' # when we submit it, where it will hit
 
   delete 'surveys/:id' => 'surveys#delete'
 
-  delete 'surveys/:survey_id/questions/:question_id' => 'surveys#delete_question'
+
+  delete 'surveys/:survey_id/questions/:question_id' => 'surveys#delete_question', as: 'delete_question'
 
   # get 'users/index'
 
